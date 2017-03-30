@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.media.RingtoneManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -62,7 +63,7 @@ public class MainActivity extends Activity {
     TimerTask timerTask;
     final android.os.Handler handler = new android.os.Handler();
     private WebView webview;
-   // Uri alarmSound = RingtoneManager.getActualDefaultRingtoneUri()
+
     private static final int uniuqID = 23423;
 
     @Override
@@ -80,8 +81,7 @@ public class MainActivity extends Activity {
         webview.setWebViewClient(new WebViewClient());
         webview .getSettings().setJavaScriptEnabled(true);
         webview .getSettings().setDomStorageEnabled(true);
-        webview.loadUrl("http://www.apple.com/");
-
+        webview.loadUrl("http://www.5harfliler.com/");
 
 
     }
@@ -101,7 +101,7 @@ public class MainActivity extends Activity {
         initializeTimerTask();
 
         //schedule the timer, after the first 5000ms the TimerTask will run every 10000ms
-        timer.schedule(timerTask, 10000, 10000); //
+        timer.schedule(timerTask, 10000, 5000); //
     }
 
 
@@ -110,60 +110,34 @@ public class MainActivity extends Activity {
         timerTask = new TimerTask() {
             public void run() {
 
-                //use a handler to run a toast that shows the current timestamp
+
                 handler.post(new Runnable() {
                     public void run() {
 
                         requestData(JSONsrc);
-                        //show the toast
-//                        int duration = Toast.LENGTH_SHORT;
-//                        Toast toast = Toast.makeText(getApplicationContext(), strDate, duration);
-//                        toast.show();
+
                     }
                 });
             }
         };
     }
 
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main_menu, menu);
-        return true;
-    }
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if ((keyCode == KeyEvent.KEYCODE_BACK) && webview.canGoBack()) {
             //if Back key pressed and webview can navigate to previous page
             webview.goBack();
-            // go back to previous page
+
             return true;
         }
         else
         {
             finish();
-            // finish the activity
+
         }
         return super.onKeyDown(keyCode, event);
     }
 
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.menu_item1) {
-            if (isOnline()) {
-                //requestData("http://services.hanselandpetal.com/feeds/flowers.json");
-                //requestData(JSONsrc);
-            } else {
-                Toast.makeText(this, "Not Online", Toast.LENGTH_LONG).show();
-            }
-        }
-        if (item.getItemId() == R.id.menu_item2) {
-            //setNotifyOBJ();
-            Toast.makeText(this, "Not Online", Toast.LENGTH_LONG).show();
-        }
-
-
-        return false;
-    }
 
     private void requestData(String uri) {
         MyTask task = new MyTask();
@@ -171,31 +145,14 @@ public class MainActivity extends Activity {
     }
 
 
-//    private void updateDisply() {
-//        if (postList != null) {
-//            textView.setText(" ");
-//            textView.setTextSize(18);
-//            for (Post post : postList) {
-//
-//                textView.append(post.getId() + "\n" + "\n" + "\n");
-//
-//            }
-//
-//
-//        } else {
-//
-//            textView.setText("Shit still null");
-//        }
-//
-//
-//    }
-
     private void checkIfUpDated() {
 
         if (latestPost.getId() < postList.get(0).getId()) {
             Log.d("MainActivity", "After if befor try" + latestPost.getId());
             if (latestPost.getId() > 0) {
                 Log.d("MainActivity", "New Post???!!!!!!!!");
+                Uri alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+                notifyOBJ.setSound(alarmSound);
                 notifyOBJ.setSmallIcon(R.mipmap.ic_launcher);
 
                 String toBeTrimed = postList.get(0).getTitle();
