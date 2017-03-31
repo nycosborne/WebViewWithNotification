@@ -1,4 +1,4 @@
-package com.a5harfliler.webviewwithnotification.model;
+package com.a5harfliler.webviewwithnotification;
 
 
 import java.io.BufferedReader;

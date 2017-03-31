@@ -6,6 +6,7 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.media.RingtoneManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -20,6 +21,7 @@ import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
@@ -27,7 +29,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.a5harfliler.webviewwithnotification.Parser.PostParser;
-import com.a5harfliler.webviewwithnotification.model.HttpManager;
+import com.a5harfliler.webviewwithnotification.HttpManager;
 import com.a5harfliler.webviewwithnotification.model.Post;
 
 import java.text.SimpleDateFormat;
@@ -76,12 +78,71 @@ public class MainActivity extends Activity {
 
         notifyOBJ = new NotificationCompat.Builder(this);
         notifyOBJ.setAutoCancel(true);
+
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.setAction(Intent.ACTION_MAIN);
+        intent.addCategory(Intent.CATEGORY_LAUNCHER);
+
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0,
+                intent, 0);
+        notifyOBJ.setContentIntent(pendingIntent);
+
+
         latestPost.setId(0); webview =(WebView)findViewById(webView);
 
+
+        webview.getSettings().setJavaScriptEnabled(true);
+        webview.getSettings().setDomStorageEnabled(true);
         webview.setWebViewClient(new WebViewClient());
-        webview .getSettings().setJavaScriptEnabled(true);
-        webview .getSettings().setDomStorageEnabled(true);
         webview.loadUrl("http://www.5harfliler.com/");
+//        webview.setWebViewClient(new WebViewClient(){
+//// shouldOverrideUrlLoadin might not be the method to use for link contro
+//
+//            @Override public boolean shouldOverrideUrlLoading(WebView view, String url) {
+//                if (Uri.parse(url).getHost().equals("twitter.com")) {
+//
+//
+//                    Log.d("shouldOverrideUrlLoading()","Is 5harfliler");
+//                 //   view.loadUrl("http://www.apple.com/");
+//
+//                    try
+//                    {
+//                        // Check if the Twitter app is installed on the phone.
+//                        getPackageManager().getPackageInfo("com.twitter.android", 0);
+//
+//                        Intent intent = new Intent(Intent.ACTION_VIEW);
+//                        intent.setClassName("com.twitter.android", "com.twitter.android.ProfileActivity");
+//                        // Don't forget to put the "L" at the end of the id.
+//                        intent.putExtra("566967598", 01234567L);
+//                        startActivity(intent);
+//                    }
+//                    catch (PackageManager.NameNotFoundException e)
+//                    {
+//                        return false;
+//                       // startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://twitter.com/5harfliler")));
+//                    }
+//
+//
+//
+//
+//                    return true;
+//                }
+//                Log.d("shouldOverrideUrlLoading()","Is not 5harfliler");
+//                return false;
+//
+//
+//
+//            }
+//
+//            @Override
+//            public void onPageFinished(WebView view, String url) {
+//                findViewById(R.id.two).setVisibility(View.GONE);
+//
+//                findViewById(R.id.webView).setVisibility(View.VISIBLE);
+//            }
+//        });
+
+
 
 
     }
@@ -169,20 +230,7 @@ public class MainActivity extends Activity {
                         getSystemService(NOTIFICATION_SERVICE);
 
                 notificationManager.notify(uniuqID, notifyOBJ.build());
-                //    private void setNotifyOBJ(){
-//        notifyOBJ.setSmallIcon(R.mipmap.ic_launcher);
-//        notifyOBJ.setContentTitle("Aler!!");
-//        notifyOBJ.setContentText("This is the body of the Alert");
-//        Intent resultIntent = new Intent(this, MainActivity.class);
-//
-//        PendingIntent resultPendingIntent = PendingIntent.getActivity(this, 0,
-//                resultIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-//
-//        NotificationManager notificationManager =(NotificationManager)
-//                getSystemService(NOTIFICATION_SERVICE);
-//
-//        notificationManager.notify(uniuqID, notifyOBJ.build());
-//    }
+
             }
             try {
                 latestPost = postList.get(0);
@@ -216,11 +264,7 @@ public class MainActivity extends Activity {
 
         @Override
         protected void onPreExecute() {
-            // updateDisply("Starting task from background");
 
-//            if (tasks.size() == 0) {
-//                progressBar.setVisibility(View.VISIBLE);
-//            }
             tasks.add(this);
         }
 
@@ -236,9 +280,6 @@ public class MainActivity extends Activity {
         @Override
         protected void onPostExecute(String result) {
 
-//            FlowerJSONParser flowerJSONParser = new FlowerJSONParser();
-//            postList = flowerJSONParser.parseFeed(result);
-
             PostParser postParser = new PostParser();
            try {
                postList = postParser.parseFeed(result);
@@ -246,24 +287,15 @@ public class MainActivity extends Activity {
                e.printStackTrace();
            }
 
-
-            //  updateDisply2(result);
-            //updateDisply();
             checkIfUpDated();
 
             tasks.remove(this);
-//            if (tasks.size() == 0) {
-//                progressBar.setVisibility(View.INVISIBLE);
-//            }
 
         }
 
         @Override
         protected void onProgressUpdate(String... values) {
-            //this values Array is contraled my the publishProgress();
-            // to have more then one eliment in the array publishProgress();
-            // needs to be loaded with multiple agrs
-            //updateDisply(values[0]);
+
         }
     }
 

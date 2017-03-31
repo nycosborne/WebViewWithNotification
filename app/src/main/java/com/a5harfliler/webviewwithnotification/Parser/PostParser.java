@@ -30,11 +30,8 @@ public class PostParser {
                 post.setDate(obj.getString("date"));
                 post.setTitle(obj.getString("title"));
 
-
                 postList.add(post);
             }
-
-
 
             return postList;
         } catch (JSONException e) {
