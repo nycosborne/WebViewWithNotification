@@ -2,6 +2,7 @@ package com.a5harfliler.webviewwithnotification;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -18,20 +19,24 @@ public class SplashActivity extends AppCompatActivity {
     public void onCreate( Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
-        finish();
-
-
-//        try {
-//            Log.d("SplashActivity","Right over the sleep thread");
-//            Thread.sleep(3000);
-//            Log.d("SplashActivity","under the sleep thread");
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
 //        Intent intent = new Intent(this, MainActivity.class);
 //        startActivity(intent);
 //        finish();
+
+
+        final Handler handel = new Handler();
+        handel.postDelayed(new Runnable() {
+
+            @Override
+            public void run() {
+                // TODO kill SplashPage or mainActivity shoudle begine to loead webview then call back.
+
+                Intent loadSplash = new Intent(SplashActivity.this, MainActivity.class);
+
+                startActivity(loadSplash);
+
+                finish();
+            }
+        }, 1000);
     }
 }

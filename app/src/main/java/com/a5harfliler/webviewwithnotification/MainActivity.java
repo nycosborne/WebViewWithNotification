@@ -6,46 +6,30 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.media.RingtoneManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.NotificationCompat;
-import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.KeyEvent;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
-import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.a5harfliler.webviewwithnotification.Parser.PostParser;
-import com.a5harfliler.webviewwithnotification.HttpManager;
 import com.a5harfliler.webviewwithnotification.model.Post;
-
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Timer;
-import java.util.TimerTask;
-
-
-
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Handler;
-import java.util.logging.LogRecord;
+import java.util.Timer;
+import java.util.TimerTask;
 
-import static android.R.attr.tag;
 import static com.a5harfliler.webviewwithnotification.R.id.webView;
 
 
@@ -54,7 +38,7 @@ public class MainActivity extends Activity {
     TextView textView;
     ProgressBar progressBar;
     List<MyTask> tasks;
-    public static final String JSONsrc = "http://nycosborne.com/WordPressTest/wp-json/wp/v2/posts";
+    public static final String JSONsrc = "http://www.5harfliler.com/wp-json/wp/v2/posts";
 
     List<Post> postList;
 
@@ -65,6 +49,7 @@ public class MainActivity extends Activity {
     TimerTask timerTask;
     final android.os.Handler handler = new android.os.Handler();
     private WebView webview;
+    private ImageView imageView;
 
     private static final int uniuqID = 23423;
 
@@ -72,10 +57,10 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+       // Log.d("onCreate","Top of onCreate" + " Hummm");
 
         tasks = new ArrayList<>();
-
+        imageView = (ImageView) findViewById(R.id.img);
         notifyOBJ = new NotificationCompat.Builder(this);
         notifyOBJ.setAutoCancel(true);
 
@@ -93,7 +78,14 @@ public class MainActivity extends Activity {
 
         webview.getSettings().setJavaScriptEnabled(true);
         webview.getSettings().setDomStorageEnabled(true);
-        webview.setWebViewClient(new WebViewClient());
+        webview.setWebViewClient(new WebViewClient(){
+
+            @Override
+            public void onPageFinished(WebView view, String url) {
+                imageView.setVisibility(View.GONE);
+                webview.setVisibility(View.VISIBLE);
+            }
+        });
         webview.loadUrl("http://www.5harfliler.com/");
 //        webview.setWebViewClient(new WebViewClient(){
 //// shouldOverrideUrlLoadin might not be the method to use for link contro

@@ -7,6 +7,10 @@
         android:id="@+id/webView"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"/>
-
+    <ImageView
+        android:id="@+id/img"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:src="@drawable/fiveharfliler3"/>
 
 </RelativeLayout>
