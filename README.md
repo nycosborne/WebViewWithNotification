@@ -14,7 +14,7 @@ Android 3.0 (honeycomb)and up
 App can be downloaded at Google Play
 
 ```
-https://play.google.com/store/apps/details?id=com.nycosborne.lifting
+https://play.google.com/store/apps
 ```
 
 ### Up And Running
