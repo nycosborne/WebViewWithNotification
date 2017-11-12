@@ -1,37 +1,42 @@
-## Welcome to GitHub Pages
+# WebViewWithNotification
 
-You can use the [editor on GitHub](https://github.com/nycosborne/WebViewWithNotification/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
+Android app for 5harfliler.com Turkish language feminist news blog. Providing user mobile accesses and custom alerts for value constant.
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+## Getting Started
 
-### Markdown
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+### Prerequisites
 
-```markdown
-Syntax highlighted code block
+Android 3.0 (honeycomb)and up
 
-# Header 1
-## Header 2
-### Header 3
+### Installing
 
-- Bulleted
-- List
+App can be downloaded at Google Play
 
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
+```
+https://play.google.com/store/apps/details?id=com.nycosborne.lifting
 ```
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+### Up And Running
 
-### Jekyll Themes
+After the app is installed make sure notification are enabled.
+You should see notification state rolling in.
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/nycosborne/WebViewWithNotification/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
 
-### Support or Contact
+## Built With
 
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+* [Android Studio](https://developer.android.com/studio/index.html) - Client framework
+* [Gradle](https://maven.apache.org/) - Dependency Management
+* [WordPress](https://rometools.github.io/rome/) - Web Framwork
+ 
+
+## Authors
+
+* **Daniel Osborne** - *Initial work* - [WorkingTitle](https://nycosborne.com)
+
+
+## Acknowledgments
+
+* Inspiration - Nigar Hacizade for all things and especially this.
+
+

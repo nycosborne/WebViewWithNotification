@@ -87,54 +87,6 @@ public class MainActivity extends Activity {
             }
         });
         webview.loadUrl("http://www.5harfliler.com/");
-//        webview.setWebViewClient(new WebViewClient(){
-//// shouldOverrideUrlLoadin might not be the method to use for link contro
-//
-//            @Override public boolean shouldOverrideUrlLoading(WebView view, String url) {
-//                if (Uri.parse(url).getHost().equals("twitter.com")) {
-//
-//
-//                    Log.d("shouldOverrideUrlLoading()","Is 5harfliler");
-//                 //   view.loadUrl("http://www.apple.com/");
-//
-//                    try
-//                    {
-//                        // Check if the Twitter app is installed on the phone.
-//                        getPackageManager().getPackageInfo("com.twitter.android", 0);
-//
-//                        Intent intent = new Intent(Intent.ACTION_VIEW);
-//                        intent.setClassName("com.twitter.android", "com.twitter.android.ProfileActivity");
-//                        // Don't forget to put the "L" at the end of the id.
-//                        intent.putExtra("566967598", 01234567L);
-//                        startActivity(intent);
-//                    }
-//                    catch (PackageManager.NameNotFoundException e)
-//                    {
-//                        return false;
-//                       // startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://twitter.com/5harfliler")));
-//                    }
-//
-//
-//
-//
-//                    return true;
-//                }
-//                Log.d("shouldOverrideUrlLoading()","Is not 5harfliler");
-//                return false;
-//
-//
-//
-//            }
-//
-//            @Override
-//            public void onPageFinished(WebView view, String url) {
-//                findViewById(R.id.two).setVisibility(View.GONE);
-//
-//                findViewById(R.id.webView).setVisibility(View.VISIBLE);
-//            }
-//        });
-
-
 
 
     }
@@ -162,7 +114,6 @@ public class MainActivity extends Activity {
 
         timerTask = new TimerTask() {
             public void run() {
-
 
                 handler.post(new Runnable() {
                     public void run() {
